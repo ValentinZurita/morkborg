@@ -1,10 +1,9 @@
 from Dice import Dice
 from character import Character
 
-dice = Dice(6)
-print(dice.roll())
-print(dice.roll_n_times(3))
 
 
-player = Character('Paco', 9, 10)
-print(player.agility)
+player = Character('Paco')
+print("Agility:" + str(player.agility))
+print("toughness:" + str(player.toughness))
+print("presence:" + str(player.presence))

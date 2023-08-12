@@ -3,12 +3,13 @@ import tables
 
 
 class Character:
-    def __init__(self, name, presence=None, toughness=None, agility=None):
+    def __init__(self, name, presence=None, toughness=None, agility=None, strength=None):
         self.name = name
         self.d6 = Dice(6)
         self.presence = self._set_ability(presence)
         self.toughness = self._set_ability(toughness)
         self.agility = self._set_ability(agility)
+        self.strength = self._set_ability(strength)
 
     def _roll_ability(self):
         return sum(sorted(self.d6.roll() for _ in range(4))[1:])

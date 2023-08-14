@@ -1,15 +1,21 @@
 from Dice import Dice
 import tables
+import random
+from prettytable import PrettyTable
+import textwrap
 
 
 class Character:
     def __init__(self, name, presence=None, toughness=None, agility=None, strength=None):
         self.name = name
         self.d6 = Dice(6)
+        self.d12 = Dice(12)
         self.presence = self._set_ability(presence)
         self.toughness = self._set_ability(toughness)
         self.agility = self._set_ability(agility)
         self.strength = self._set_ability(strength)
+        self.carrying_capacity = self.strength + 8
+        self.inventory = []
 
     def _roll_ability(self):
         return sum(sorted(self.d6.roll() for _ in range(4))[1:])
@@ -27,3 +33,78 @@ class Character:
             if rolled_range[0] <= rolled_number <= rolled_range[1]:
                 return value
         return None
+
+    def get_initial_equipment(self, d1num=None, d2num =  None, d3num = None):
+        if d1num is None:
+            d1num = self.d6.roll()
+        if d2num is None:
+            d2num = self.d12.roll()
+        if d3num is None:
+            d3num = self.d12.roll()
+
+        d1_list = tables.initial_equipment["1st"][d1num - 1]
+        d2_list = tables.initial_equipment["2nd"][d2num - 1]
+        d3_list = tables.initial_equipment["3rd"][d3num - 1]
+
+        if d1_list["name"] != "Nothing":
+            self.inventory.append(d1_list["name"])
+        self.inventory.append(d2_list["name"])
+        self.inventory.append(d3_list["name"])
+
+        if "Unclean scroll" in self.inventory:
+            random_unclean_scroll = random.choice(list(tables.scrolls["Unclean Scrolls"].values()))
+            self.inventory.append(random_unclean_scroll["Scroll"])
+            self.inventory.remove("Unclean scroll")
+
+        elif "Sacred scroll" in self.inventory:
+            random_sacred_scroll = random.choice(list(tables.scrolls["Sacred Scroll"].values()))
+            self.inventory.append(random_sacred_scroll["Scroll"])
+            self.inventory.remove("Sacred scroll")
+
+    def show_inventory(self):
+        table = PrettyTable()
+        table.field_names = ["No.", "Item", "Description"]
+
+        table.align["Item"] = "l"
+        table.align["Description"] = "l"
+        
+        for item in self.inventory:
+            item_info = self._get_item_info(item)
+            item_description = item_info.get("description", "")
+            #table.add_row([self.inventory.index(item)+1, item, item_info['description']])
+            if len(item_description) > 50:
+                wrapped_description = textwrap.fill(item_description, 50)  # Dividir en líneas de 50 caracteres
+                table.add_row([self.inventory.index(item) + 1, item, wrapped_description])
+            else:
+                table.add_row([self.inventory.index(item) + 1, item, item_description])
+        
+        print("\nInventory:\n")
+        print(table)
+
+    def _get_item_info(self, item_name):
+        for item_table in tables.initial_equipment.values():
+            item_info = next((item for item in item_table if item["name"] == item_name), None)
+            if item_info:
+                return item_info
+
+        # Si el elemento no se encontró en las tablas de equipo inicial, buscar en los pergaminos
+        for scroll_table in tables.scrolls.values():
+            scroll_info = next((scroll for scroll in scroll_table.values() if scroll["Scroll"] == item_name), None)
+            if scroll_info:
+                return {"description": scroll_info["Description"]}
+
+        return {"description": ""}
+
+
+
+
+
+
+    
+
+
+
+
+
+
+

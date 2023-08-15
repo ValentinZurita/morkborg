@@ -10,5 +10,5 @@ print("presence:" + str(player.presence))
 print("strenght:" + str(player.strength))
 print("Inventory:" + str(player.carrying_capacity))
 
-player.get_initial_equipment()
+player.set_random_equipment()
 player.show_inventory()

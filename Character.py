@@ -6,11 +6,12 @@ import textwrap
 
 
 class Character:
-    def __init__(self, name, presence=None, toughness=None, agility=None, strength=None):
+    def __init__(self, name, presence=None, toughness=None, agility=None, strength=None, hit_points=None):
         self.name = name
         self.d2 = Dice(2)
         self.d4 = Dice(4)
         self.d6 = Dice(6)
+        self.d8 = Dice(8)
         self.d12 = Dice(12)
         self.d10 = Dice(10)
         self.presence = self._set_ability(presence)
@@ -18,6 +19,7 @@ class Character:
         self.agility = self._set_ability(agility)
         self.strength = self._set_ability(strength)
         self.carrying_capacity = self.strength + 8
+        self.hit_points = self.set_hit_points()
         self.inventory = []
 
     def _roll_ability(self):
@@ -161,21 +163,16 @@ class Character:
                     break
  
         if rolled_number in tables.initial_armors:
-            if rolled_number is not 1:
+            if rolled_number != 1:
                 armor_name = tables.initial_armors[rolled_number]["name"]
                 self.inventory.append(armor_name)
 
-    
-
-
-
-
-
-    
-
-
-
-
-
-
+    def set_hit_points(self, rolled_number=None):
+        if rolled_number is None:
+            rolled_number = self.d8.roll()
+        
+        self.hit_points = self.toughness + rolled_number
+        
+        if self.hit_points < 1:
+            self.hit_points = 1
 

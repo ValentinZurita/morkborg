@@ -23,13 +23,16 @@ class Character:
     def _roll_ability(self):
         return sum(sorted(self.d6.roll() for _ in range(4))[1:])
 
+
     def _set_ability(self, ability_value):
         return ability_value if ability_value is not None else self._generate_random_ability()
+
 
     def _generate_random_ability(self):
         rolled_number = self._roll_ability()
         score = self.set_ability_score(rolled_number)
         return score
+
 
     def set_ability_score(self, rolled_number):
         for rolled_range, value in tables.abilities_score.items():
@@ -37,8 +40,8 @@ class Character:
                 return value
         return None
 
-    def set_random_equipment(self):
 
+    def set_random_equipment(self):
         self.set_initial_equipment()
         self.set_initial_weapon()
         self.set_initial_armor()
@@ -91,6 +94,29 @@ class Character:
         print("\nInventory:\n")
         print(table)
 
+    def show_abilities(self):
+        table = PrettyTable()
+        table.field_names = ["Ability", "Score"]
+
+        table.align["Ability"] = "l" 
+
+        def format_ability_score(score):
+            if score > 0:
+                return f"+{score}"
+            elif score < 0:
+                return f"{score}"
+            else:
+                return "±0"
+
+        table.add_row(["Agility", format_ability_score(self.agility)])
+        table.add_row(["Presence", format_ability_score(self.presence)])
+        table.add_row(["Strength", format_ability_score(self.strength)])
+        table.add_row(["Toughness", format_ability_score(self.toughness)])
+
+        print("\nInventory:\n")
+        print(table)
+
+
     def _get_item_info(self, item_name):
         for item_table in tables.initial_equipment.values():
             item_info = next((item for item in item_table if item["name"] == item_name), None)
@@ -139,6 +165,7 @@ class Character:
                 armor_name = tables.initial_armors[rolled_number]["name"]
                 self.inventory.append(armor_name)
 
+    
 
 
 

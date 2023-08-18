@@ -6,8 +6,7 @@ import textwrap
 
 
 class Character:
-    def __init__(self, name, presence=None, toughness=None, agility=None, strength=None, hit_points=None):
-        self.name = name
+    def __init__(self, name = None, presence=None, toughness=None, agility=None, strength=None, hit_points=None):
         self.d2 = Dice(2)
         self.d4 = Dice(4)
         self.d6 = Dice(6)
@@ -21,6 +20,21 @@ class Character:
         self.carrying_capacity = self.strength + 8
         self.hit_points = self.set_hit_points()
         self.inventory = []
+        self.name = self.set_name()
+
+
+    def set_name(self, d6 = None, d8 = None):
+        if d6 is None:
+            d6 = self.d6.roll()
+        if d8 is None:
+            d8 = self.d8.roll()
+
+        for entry in tables.names:
+            if entry["d6"] == d6 and entry["d8"] == d8:
+                self.name = entry["Name"]
+                break
+
+        print(self.name)
 
     def _roll_ability(self):
         return sum(sorted(self.d6.roll() for _ in range(4))[1:])

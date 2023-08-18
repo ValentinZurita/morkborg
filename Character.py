@@ -4,26 +4,46 @@ import random
 from prettytable import PrettyTable
 import textwrap
 
+sss
+sss.
 
 class Character:
-    def __init__(self, name = None, presence=None, toughness=None, agility=None, strength=None, hit_points=None):
+
+    def __init__(self, name = None, presence=None, toughness=None, agility=None, strength=None, hit_points=None, omens = None):
+        self.initialize_dice()
+        self.initialize_attributes(name, presence, toughness, agility, strength, hit_points, omens)
+
+
+    def initialize_dice(self):
         self.d2 = Dice(2)
         self.d4 = Dice(4)
         self.d6 = Dice(6)
         self.d8 = Dice(8)
         self.d12 = Dice(12)
         self.d10 = Dice(10)
+
+
+    def initialize_attributes(self, name, presence, toughness, agility, strength, hit_points, omens):
         self.presence = self._set_ability(presence)
         self.toughness = self._set_ability(toughness)
         self.agility = self._set_ability(agility)
         self.strength = self._set_ability(strength)
         self.carrying_capacity = self.strength + 8
-        self.hit_points = self.set_hit_points()
+        self.hit_points = self.roll_hit_points()
         self.inventory = []
-        self.name = self.set_name()
+        self.name = self.roll_name()
+        self.omens = self.roll_omens()
 
 
-    def set_name(self, d6 = None, d8 = None):
+    def roll_omens(self, d2 = None):
+        if d2 is None:
+            d2 = self.d2.roll()
+        self.omens = d2
+
+        print(d2)
+
+
+    def roll_name(self, d6 = None, d8 = None):
         if d6 is None:
             d6 = self.d6.roll()
         if d8 is None:
@@ -35,6 +55,7 @@ class Character:
                 break
 
         print(self.name)
+
 
     def _roll_ability(self):
         return sum(sorted(self.d6.roll() for _ in range(4))[1:])
@@ -110,6 +131,7 @@ class Character:
         print("\nInventory:\n")
         print(table)
 
+
     def show_abilities(self):
         table = PrettyTable()
         table.field_names = ["Ability", "Score"]
@@ -129,7 +151,7 @@ class Character:
         table.add_row(["Strength", format_ability_score(self.strength)])
         table.add_row(["Toughness", format_ability_score(self.toughness)])
 
-        print("\nInventory:\n")
+        print("\nAbilities:\n")
         print(table)
 
 
@@ -181,12 +203,13 @@ class Character:
                 armor_name = tables.initial_armors[rolled_number]["name"]
                 self.inventory.append(armor_name)
 
-    def set_hit_points(self, rolled_number=None):
+
+    def roll_hit_points(self, rolled_number=None):
         if rolled_number is None:
             rolled_number = self.d8.roll()
         
         self.hit_points = self.toughness + rolled_number
         
         if self.hit_points < 1:
-            self.hit_points = 1
+            self.hit_points = 1    
 

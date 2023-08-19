@@ -3,9 +3,7 @@ from Character import Character
 
 
 
-player = Character('Paco')
+player = Character()
 
 player.set_random_equipment()
-player.show_inventory()
-player.show_abilities()
-player.set_hit_points()
+player.print_character_sheet()

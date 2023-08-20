@@ -1,9 +1,10 @@
 from Dice import Dice
 from Character import Character
+from FangedDeserter import FangedDeserter
 
 
 
-player = Character()
+player = FangedDeserter()
 
 player.set_random_equipment()
-player.print_character_sheet()
+player.print_hello()

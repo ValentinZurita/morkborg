@@ -15,22 +15,24 @@ class Character:
                  strength=None,
                  hit_points=None,
                  omens=None,
-                 silver=None
+                 silver=None,
+                 background=None,
+                 character_abilities=None
                  ):
 
         self.initialize_dice()
         self.initialize_attributes(
-            name, presence, toughness, agility, strength, hit_points, omens)
+            name, presence, toughness, agility, strength, hit_points, omens, background, character_abilities)
 
     def initialize_dice(self):
         self.d2 = Dice(2)
         self.d4 = Dice(4)
         self.d6 = Dice(6)
         self.d8 = Dice(8)
-        self.d12 = Dice(12)
         self.d10 = Dice(10)
+        self.d12 = Dice(12)
 
-    def initialize_attributes(self, name, presence, toughness, agility, strength, hit_points, omens):
+    def initialize_attributes(self, name, presence, toughness, agility, strength, hit_points, omens, background, character_abilities):
         self.name = self.roll_name()
         self.inventory = []
         self.presence = self._set_ability(presence)
@@ -42,6 +44,8 @@ class Character:
         self.omens = self.roll_omens()
         self.character_class = "No class"
         self.silver = 0
+        self.background = self.roll_background()
+        self.character_abilities = self.roll_character_abilities()
 
     def roll_omens(self, d2=None):
         if d2 is None:
@@ -229,3 +233,16 @@ class Character:
 
         if hit_points < 1:
             hit_points = 1
+
+    def roll_background(self, rolled_number=None):
+        if rolled_number is None:
+            return "Your past is a mistery"
+        else:
+            return "Your past is a mistery"
+
+    def roll_character_abilities(self, rolled_number=None):
+        if rolled_number is None:
+            return "You do not have any special ability"
+        else:
+            return "You do not have any special ability"
+

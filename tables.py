@@ -1,11 +1,11 @@
 abilities_score = {
-						    (1, 4): -3,
-						    (5, 6): -2,
-						    (7, 8): -1,
-						    (9, 12): 0,
-						    (13, 14): 1,
-						    (15, 16): 2,
-						    (17, 20): 3
+				    (1, 4): -3,
+				    (5, 6): -2,
+				    (7, 8): -1,
+				    (9, 12): 0,
+				    (13, 14): 1,
+				    (15, 16): 2,
+				    (17, 20): 3
 				   }
 
 initial_equipment = {
@@ -17,6 +17,7 @@ initial_equipment = {
 								    {"name": "Small wagon", "description": ""},
 								    {"name": "Donkey", "description": ""}
 								],
+
 						"2nd" : [
 								    {"name": "Rope", "description": "30 feet"},
 								    {"name": "Torches", "description": "Presence + 4 torches"},
@@ -31,6 +32,7 @@ initial_equipment = {
 								    {"name": "Red poisson", "description": "d4 doses (Toughness DR12 or d10 damage)"},
 								    {"name": "Silver crucifix", "description": ""}
 								],
+
 						"3rd":	[
 									{"name": "Life elixir", "description": "d4 doses that heals d6 HP and removes infection"},
 								    {"name": "Sacred scroll", "description": ""},
@@ -45,10 +47,14 @@ initial_equipment = {
 								    {"name": "Lard", "description": "May function as 5 meals in a pinch"},
 								    {"name": "Tent", "description": ""}
 								]
+
 					}
+					
 
 scrolls = {
+
 		    "Unclean Scrolls": {
+
 		        1: {"Scroll": "Unclean Scroll: Palms Open the Southern Gate", "Description": "A ball of fire hits d2 creatures dealing d8 damage per creature."},
 		        2: {"Scroll": "Unclean Scroll: Tongue of Eris", "Description": "A creature of your choice is confused for 10 minutes."},
 		        3: {"Scroll": "Unclean Scroll: Te-le-kin-esis", "Description": "Move an object up 1d10×10 feet for d6 minutes."},
@@ -60,7 +66,9 @@ scrolls = {
 		        9: {"Scroll": "Unclean Scroll: Eyelid Blinds the Mind", "Description": "d4 creatures fall asleep for one hour unless they succeed a DR14 test."},
 		        10: {"Scroll": "Unclean Scroll: Death", "Description": "All creatures within 30 feet lose a total of 4d10 HP."}
 		    },
+
 		    "Sacred Scroll": {
+
 		        1: {"Scroll": "Sacred Scroll: Grace of a Dead Saint", "Description": "d2 creatures regain d10 HP each."},
 		        2: {"Scroll": "Sacred Scroll: Grace for a Sinner", "Description": "A creature of your choice gets +d6 on one roll (damage, test etc.)."},
 		        3: {"Scroll": "Sacred Scroll: Whispers pass the Gate", "Description": "Ask three questions to a deceased creature."},
@@ -71,10 +79,14 @@ scrolls = {
 		        8: {"Scroll": "Sacred Scroll: Hermetic Step", "Description": "You find all traps in your path for 2d10 minutes."},
 		        9: {"Scroll": "Sacred Scroll: Roskoe’s Consuming Glare", "Description": "d4 creatures lose d8 HP each."},
 		        10: {"Scroll": "Sacred Scroll: Enochian Syntax", "Description": "One creature blindly obeys a single command."}
+		    
 		    }
+
 		}
 
+
 initial_weapons = {
+
 				    1: {"name": "Femur", "description": "d4 damage"},
 				    2: {"name": "Staff", "description": "d4 damage"},
 				    3: {"name": "Shortsword", "description": "d4 damage"},
@@ -85,16 +97,21 @@ initial_weapons = {
 				    8: {"name": "Flail", "description": "d8 damage"},
 				    9: {"name": "Crossbow", "description": "d8 damage with Presence + 10 bolts"},
 				    10: {"name": "Zweihander", "description": "d10 damage"}
-}  
+
+				   }  
+
 
 initial_armors = {
+
 				    1: {"name": "No Armor", "description": "Tier 0"},
 				    2: {"name": "Light armor", "description": "-d2 damage, tier 1"},
 				    3: {"name": "Medium armor", "description": "-d4 damage, tier 2"},
 				    4: {"name": "Heavy armor", "description": "-d6 damage, tier 3"}
+
 				 }
 
 names = [
+
 		    {"d6": 1, "d8": 1, "Name": "Aerg-Tval"},
 		    {"d6": 1, "d8": 2, "Name": "Agn"},
 		    {"d6": 1, "d8": 3, "Name": "Arvant"},
@@ -143,6 +160,35 @@ names = [
 		    {"d6": 6, "d8": 6, "Name": "Vrakh"},
 		    {"d6": 6, "d8": 7, "Name": "Vresi"},
 		    {"d6": 6, "d8": 8, "Name": "Wemut"},
+
 		]
 
-print(type(names))
+
+fanged_deserter = {
+
+				    "background": "You have thirty or so friends who never let you down: YOUR TEETH. Disloyal, deranged or simply uncontrollable, any group that didn’t boot you out you left anyway. But your parliament of teeth — enormous, protruding, thick and sharp — have always been your allies.",
+				    
+				    "Earliest Memories": {
+									        "1": "A burnt-black building in Sarkash. Your home?",
+									        "2": "A derelict rotting ship rolling endlessly across a grey sea.",
+									        "3": "A brothel in Schleswig. Quite a friendly environment.",
+									        "4": "Sleeping with dogs in the corner of an inn, waiting for someone to return.",
+									        "5": "Following an army in eastern Wästland.",
+									        "6": "Suckling a wolf in the wild of Bergen Chrypt."
+				    					 },
+
+				    "Default Ability": {
+								        	"Bitte Attack": "DR10 to attack, d6 damage. You must be close to your target. 1–2 on d6 chance the enemy gets a free attack. Your target. 1–2 on d6 chance the enemy gets a free attack.",
+								        	"Impaired Agility and Illiteracy": "Normal Agility tests are DR14 instead of DR12, excluding defence. Illiterate; your are incapable of understanding scrolls."
+				    				   },
+
+				    "Optional Abilities": {
+				        					"1": "Crumples Monster Mask: Strikes primitive fear into lesser creatures like goblins, gnoums and children. While worn, they check Morale every round.",
+				        					"2": "The Brown Scimitar of Galgenbeck: A stinking sword you pulled from a military shit-ditch. D6 damage. DR10 attack and defence while you wield it. 1 in 6 chance a wounded enemy is smitten with potent sepsis, dying in 10 minutes.",
+				        					"3": "Wizard Teeth: Four weird teeth rattle within a blackened pouch. Before battle roll a d6 for each one. For every 6 one of your attacks deals maximum damage.",
+				        					"4": "Old Sigûrd’s sling: Sigûrd was the strongest man whose throat you ever gnawed. Woven from his long grey hair, this sling has never failed you. 2d4 damage, requires fist-sized rocks which, perhaps regrettably, are everywhere.",
+				        					"5": "Ancient Gore-Hound: Asthmatic, deluded and on its last legs, this wizened creature still has a superb nose and can sniffle up treasure in the most disgusting debris. Attacks with DR10 (bite d6). Defends with DR12, 10 HP. Becomes frenzied around goblins and berserkers.",
+				        					"6": "The Shoe of Death’s Horse: It looks normal but since finding it in an obscure crypt you are convinced this shoe came from the horse of Death himself. In your hands it hits with DR10, d4 damage. 1 in 6 chance the shoe smashes the skull, instantly killing small-to medium sized creatures. The shoe returns to your hand like a boomerang."
+				    					   }
+
+				  }

@@ -22,7 +22,16 @@ class Character:
 
         self.initialize_dice()
         self.initialize_attributes(
-            name, presence, toughness, agility, strength, hit_points, omens, background, character_abilities)
+                                    name, 
+                                    presence, 
+                                    toughness, 
+                                    agility, 
+                                    strength, 
+                                    hit_points, 
+                                    omens, 
+                                    background, 
+                                    character_abilities
+                                  )
 
     def initialize_dice(self):
         self.d2 = Dice(2)
@@ -32,7 +41,18 @@ class Character:
         self.d10 = Dice(10)
         self.d12 = Dice(12)
 
-    def initialize_attributes(self, name, presence, toughness, agility, strength, hit_points, omens, background, character_abilities):
+    def initialize_attributes(
+                                self, 
+                                name, 
+                                presence, 
+                                toughness, 
+                                agility, 
+                                strength, 
+                                hit_points, 
+                                omens, 
+                                background, 
+                                character_abilities
+                            ):
         self.name = self.roll_name()
         self.inventory = []
         self.presence = self._set_ability(presence)
@@ -125,7 +145,6 @@ class Character:
             item_info = self._get_item_info(item)
             item_description = item_info.get("description", "")
             if len(item_description) > 50:
-                # Dividir en líneas de 50 caracteres
                 wrapped_description = textwrap.fill(item_description, 50)
                 table.add_row([self.inventory.index(item) +
                                1, item, wrapped_description])

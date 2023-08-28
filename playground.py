@@ -6,5 +6,6 @@ from FangedDeserter import FangedDeserter
 
 player = FangedDeserter()
 
+
 player.set_random_equipment()
-player.print_hello()
+player.print_background()
